@@ -33,6 +33,7 @@ const Register = () => {
       };
   
       axios(configuration)
+      
       .then((result) => { 
         setRegister(true);
         console.log(result.data.message);
@@ -45,6 +46,7 @@ const Register = () => {
 
   return (
     <div>
+    
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         {/* <label>
@@ -57,7 +59,7 @@ const Register = () => {
           <input type="email"  name="email" value={email} onChange={handleEmailChange} />
         </label>
         <br />
-        
+
         <label>
           Password:
           <input type="password"  name="password" value={password} onChange={handlePasswordChange} />
