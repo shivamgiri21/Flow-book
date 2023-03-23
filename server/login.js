@@ -19,7 +19,7 @@ await User.findOne({ email: request.body.email })
 
       // check if password matches
       if(!passwordCheck) {
-        return response.status(400).send({
+        response.status(200).send({
           message: "Passwords does not match",
           error,
         });
@@ -45,7 +45,7 @@ await User.findOne({ email: request.body.email })
 
     // catch error if password does not match
     .catch((error) => {
-      response.status(400).send({
+      response.status(200).send({
         message: "Passwords does not match",
         error,
       });
@@ -54,7 +54,7 @@ await User.findOne({ email: request.body.email })
 
 // catch error if email does not exist
 .catch((e) => {
-  response.status(404).send({
+ return response.status(200).send({
     message: "Email not found",
     e,
   });
