@@ -1,5 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
+
+
+
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -32,9 +39,16 @@ const Login = () => {
       axios(configuration)
 
       .then((result) => {
+
+        cookies.set("TOKEN", result.data.token, {
+            path: "/",
+          });
+
         setLogin(true);
         console.log(result);
         setMessage(result.data.message);
+
+        window.location.href = "/private";
 
       })
       .catch((error) => {

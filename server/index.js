@@ -32,8 +32,9 @@ app.use((req, res, next) => {
 app.use('/register', require('./register'));
 app.use('/login', require('./login'));
 app.get("/auth-endpoint", auth, (request, response) => {
-      response.json({ message: "You are authorized to access me" });
+      response.json({ isAdmin:true, message: "You are authorized to access me" });
     });
+
 
 
     app.listen(5000,function()
