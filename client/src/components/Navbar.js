@@ -7,6 +7,9 @@ import { mobile } from "../responsive";
 const Container = styled.div`
   height: 60px;
   ${mobile({ height: "50px" })}
+  position: fix;
+  top: 0;
+  // z-index:999;
 `;
 
 const Wrapper = styled.div`

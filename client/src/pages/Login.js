@@ -47,7 +47,8 @@ const Login = () => {
         setLogin(true);
         console.log(result);
         setMessage(result.data.message);
-
+ 
+        if(result.data.message==="Login Successful")
         window.location.href = "/private";
 
       })

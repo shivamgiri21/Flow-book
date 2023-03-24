@@ -5,6 +5,8 @@ import Login from "./pages/Login"
 import Home from "./pages/Home"
 import Private from "./components/Private";
 import ProtectedRoutes from "./ProtectedRoutes";
+import SellHome from "./pages/Sell/SellHome";
+import NewProduct from "./pages/Sell/NewProduct";
 
 function App() {
   return (
@@ -17,6 +19,9 @@ function App() {
              </Route>
              <Route path="/register" element={<Register />}></Route>
             <Route path="/login" element={<Login/>}></Route>
+            <Route path="/sell" element={<SellHome/>}></Route>
+            <Route path="/sell/products" element={<NewProduct/>}></Route>
+
             
           </Routes>
         </div>

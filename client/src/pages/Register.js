@@ -19,6 +19,7 @@ const Register = () => {
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
+  const pick="shivam"
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,7 +29,7 @@ const Register = () => {
         url: "http://localhost:5000/register",
         data: {
           email,
-          password,
+          password
         },
       };
   
@@ -40,7 +41,7 @@ const Register = () => {
         setMessage(result.data.message);
     
     })
-    .catch((error) => {console.log(error);})
+    .catch((error) => {console.log(error.response.data);})
 
   };
 
