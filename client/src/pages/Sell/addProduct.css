@@ -1,3 +1,18 @@
+
+.container{
+  display: flex;
+  margin-top: 10px;
+}
+
+input,textarea{
+   border:2px;
+}
+
+.link{
+  text-decoration: none;
+  color: inherit;
+}
+
 .newProduct {
     flex: 4;
     margin-left: 100px;

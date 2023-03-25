@@ -9,7 +9,7 @@ const Container = styled.div`
   ${mobile({ height: "50px" })}
   position: fix;
   top: 0;
-  // z-index:999;
+  z-index:999;
 `;
 
 const Wrapper = styled.div`

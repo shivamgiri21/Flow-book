@@ -32,7 +32,7 @@ const Private = () => {
       .catch((error) => {
         error = new Error();
       });
-     }, []);
+     }, [token]);
      
     
      const logout = () => {

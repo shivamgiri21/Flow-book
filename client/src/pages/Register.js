@@ -19,7 +19,7 @@ const Register = () => {
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
-  const pick="shivam"
+ 
 
   const handleSubmit = (event) => {
     event.preventDefault();
