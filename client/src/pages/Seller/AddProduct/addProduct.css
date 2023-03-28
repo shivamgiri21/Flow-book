@@ -1,4 +1,7 @@
 
+.input1{
+  border: 0.9px solid lightgray !important;
+}
 .container{
   display: flex;
   margin-top: 10px;
@@ -25,6 +28,7 @@ input,textarea{
   .addProductItem {
     width: 250px;
     display: flex;
+    /* border: 1px solid black !important; */
     flex-direction: column;
     margin-bottom: 10px;
   }

@@ -1,34 +1,49 @@
 import React from "react";
 import "./App.css"
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Register from "./pages/Register"
-import Login from "./pages/Login"
+import { BrowserRouter, Routes, Route, Router } from 'react-router-dom';
+import AppWrapper from "./AppWrapper";
+import Register from "./pages/Auth/Register"
+import Login from "./pages/Auth/Login"
 import Home from "./pages/Home"
+import Cart from "./pages/Buyer/Cart";
 import Private from "./components/Private";
 import ProtectedRoutes from "./ProtectedRoutes";
-import SellHome from "./pages/Sell/SellHome";
-import AddProduct from "./pages/Sell/AddProduct";
-import SellProducts from "./pages/Sell/SellProducts"
 
+import Dashboard from "./pages/Seller/DashBoard/Dashboard";
+import SellProducts from "./pages/Seller/SellProducts/SellProducts";
+import AddProduct from "./pages/Seller/AddProduct/AddProduct";
+import UpdateProduct from "./pages/Seller/UpdateProduct/UpdateProduct";
+
+// import ProtectedRoutes from "./ProtectedRoutes"
+import ProductDetails from "./components/ProductDetails";
 
 function App() {
   return (
   <BrowserRouter>
+  
         <div>
+          
+        <AppWrapper>
           <Routes>
+           
              <Route path="/" element={<Home/>}></Route>
              <Route path="/private" element={<ProtectedRoutes />}>
              <Route path="/private" element={<Private />}></Route>
              </Route>
              <Route path="/register" element={<Register />}></Route>
             <Route path="/login" element={<Login/>}></Route>
-            <Route path="/sell" element={<SellHome/>}></Route>
+            <Route path="/sell" element={<Dashboard/>}></Route>
             <Route path="/sell/addproduct" element={<AddProduct/>}></Route>
             <Route path="/sell/products" element={<SellProducts/>}></Route>
+            <Route path="/sell/products/:id" element={<UpdateProduct/>}></Route>
+            <Route path="/cart" element={<Cart/>}></Route>
 
 
+            <Route path="/product/:slug" element={<ProductDetails />}></Route>
             
           </Routes>
+          </AppWrapper>
+          
         </div>
       </BrowserRouter>
   )

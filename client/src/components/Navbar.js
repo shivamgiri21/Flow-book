@@ -1,15 +1,21 @@
-import { Badge } from "@material-ui/core";
-import { Search, ShoppingCartOutlined } from "@material-ui/icons";
+// import { Badge } from "@material-ui/core";
+// import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
+
+import { SearchOutlined } from "@ant-design/icons";
+import {ShoppingCartOutlined } from "@ant-design/icons"
 
 const Container = styled.div`
   height: 60px;
   ${mobile({ height: "50px" })}
-  position: fix;
+  position: sticky;
   top: 0;
   z-index:999;
+  background-color:#f0f0ff;
+  opacity:0.9;
 `;
 
 const Wrapper = styled.div`
@@ -38,16 +44,19 @@ const SearchContainer = styled.div`
   align-items: center;
   margin-left: 25px;
   padding: 5px;
+  background-color:white;
 `;
 
 const Input = styled.input`
   border: none;
+  outline:none;
   ${mobile({ width: "50px" })}
 `;
 
 const Center = styled.div`
   flex: 1;
   text-align: center;
+  font-size:25px;
 `;
 
 const Logo = styled.h1`
@@ -74,22 +83,28 @@ const Navbar = () => {
     <Container >
       <Wrapper>
         <Left>
-          <Language>EN</Language>
-          <SearchContainer>
+
+           <SearchContainer>
             <Input placeholder="Search" />
-            <Search style={{ color: "gray", fontSize: 16 }} />
+            <SearchOutlined  style={{ color: "gray", fontSize: 20 }} />
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>BOOK.</Logo>
+          <Logo>BOOK</Logo>
         </Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
           <MenuItem>
-            <Badge badgeContent={4} color="primary">
-              <ShoppingCartOutlined />
-            </Badge>
+          <Link  to="/register">
+          REGISTER
+          </Link></MenuItem>
+          <MenuItem>
+          <Link  to="/login">
+          SIGN IN
+          </Link></MenuItem>
+          <MenuItem>
+            <span badgeContent={4} color="primary">
+           <ShoppingCartOutlined style={{ fontSize: '32px', color: '#000000'}} theme="filled"/>
+            </span>
           </MenuItem>
         </Right>
       </Wrapper>

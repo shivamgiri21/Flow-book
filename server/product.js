@@ -1,7 +1,7 @@
 var router = require('express').Router();
 const Product = require("./models/product");
 
-
+// ADD
 router.post("/", async(request, response) => {
 
     // const newProduct = new Product({
@@ -31,6 +31,8 @@ router.post("/", async(request, response) => {
           });
 
   });
+
+  // UPDATE
 
   router.put("/:id",  async (req, res) => {
     try {
@@ -81,7 +83,6 @@ router.post("/", async(request, response) => {
 
        const products = await Product.find();
 
-      
         res.status(201).send({
         message: "Fetched all products",
         products
@@ -92,6 +93,26 @@ router.post("/", async(request, response) => {
        catch (err) {
       res.status(500).json(err);
     }
+  });
+
+
+  router.get("/:id", async (req, res) => {
+
+     try{
+     const products=  await Product.findById(req.params.id);
+
+     res.status(201).send({
+      message: "Fetched required product",
+      products
+        });
+
+     }
+
+       catch (err){
+      res.status(500).json(err);
+      console.log(err);
+      }
+
   });
 
 

@@ -1,8 +1,9 @@
 import { useState } from "react";
+
 import "./addProduct.css";
 import axios from "axios";
-import Navbar from "../../components/Navbar";
-import Sidebar from "../../components/Sell/Sidebar";
+import Navbar from "../../../components/Navbar";
+import Sidebar from "../../../components/Seller/Sidebar";
 
 export default function AddProduct() {
 
@@ -37,11 +38,14 @@ const [data,setData] =useState(initial);
  .catch(err => console.log(err))
  }
 
-    
+ 
    const handleChange= async(e)=>{
     setData({...data, [e.target.name]: e.target.value});
+     
    }
-
+   
+  
+  
 
   const handleClick=(e)=>{
 
@@ -52,26 +56,21 @@ const [data,setData] =useState(initial);
     const configuration = {
         method: "post",
         url: "http://localhost:5000/sell/products",
-        data: {
-         title:data.title,
-         description:data.description,
-         price:data.price,
-         pincode:data.pincode,
-         imgurl:imgurl
-        },
+        data: {...data,
+        imgurl:imgurl}
+       
       };
   
       axios(configuration)
       
       .then((result) => { 
-        // setRegister(true);
+        
         console.log(result);
-        // setMessage(result.data.message);
-    
-    })
+        })
+
     .catch((error) => {console.log(error.response.data.errors.pincode);})
 
-  
+     alert("Product Added");
   }
 
 
@@ -83,12 +82,12 @@ const [data,setData] =useState(initial);
     <div className="container"> 
     <Sidebar/> 
     <div className="newProduct"> 
-      <h1 className="addProductTitle">New Product</h1>
+      <h1 class="text-3xl"> Add Product</h1>
       <form className="addProductForm">
         
         <div className="addProductItem">
           <label>Title</label>
-          <input 
+          <input class="input1" 
             name="title"
             type="text"
             placeholder="Apple Airpods"
@@ -100,7 +99,7 @@ const [data,setData] =useState(initial);
         </div>
         <div className="addProductItem">
           <label>Description</label>
-          <textarea
+          <textarea class="input1"
             name="description"
             type="text"
             required="true"
@@ -114,7 +113,7 @@ const [data,setData] =useState(initial);
         </div>
         <div className="addProductItem">
           <label>Price</label>
-          <input
+          <input class="input1"
             name="price"
             type="number"
             value={data.price}
@@ -126,7 +125,7 @@ const [data,setData] =useState(initial);
         </div>
         <div className="addProductItem">
           <label>Pin Code</label>
-            <input type="text" 
+            <input class="input1" type="text" 
             name="pincode"
             value={data.pincode}
             placeholder="273001"
@@ -136,17 +135,18 @@ const [data,setData] =useState(initial);
             />
 
         </div>
-        <div className="addProductItem">
+        {/* <div className="addProductItem">
           <label>Stock</label>
-          {/* <select name="inStock" onChange={handleChange}> */}
-           <select name="inStock" >
+        
+            {/*<select name="inStock" >
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
-        </div>
+        </div> */}
+
         <div className="addProductItem">
           <label>Image</label>
-          <input
+          <input class="input1" 
          
           name="imgurl"
           value={data.imgurl}
