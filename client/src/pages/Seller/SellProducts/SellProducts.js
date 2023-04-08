@@ -8,58 +8,35 @@ import axios from 'axios';
 import { useContext } from "react";
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { ProductDataContext } from '../../../Context/ProductDataContext';
+import Cookies from "universal-cookie";
+import jwtDecode from 'jwt-decode';
 
-import { ProductDataContext } from '../../../Context/ProductData';
+const cookies = new Cookies();
 
 const SellProducts =  () => {
+
+  const token = cookies.get("TOKEN");
+  const user1=jwtDecode(token);
 
    const [productDataState,setProductDataState] = useContext(ProductDataContext)
      // const[data,setData] =useState([])
     const[url1,seturl1]=useState("");
 
-     
- 
-
-
-  //   const getAllProducts = function()
-  //   {
-  //       const configuration = {
-  //           method: "get",
-  //           url: "http://localhost:5000/sell/products",
-  //         //   headers: { // Authorization: `Bearer ${token}`, //   },
-  //         };
-      
-  //        axios(configuration)
-  //       .then((result) => {
-  //         // console.log(result.data.products);
-  //         setProductDataState(result.data.products);
-  //         // console.log(productDataState);
-
-  //       })
-  //       .catch((error) => {
-  //         error = new Error();
-  //       });
-  //   }
-  //   useEffect(() => {
-  
-  //     getAllProducts();
-  //  },[]);
-
-
+    //  console.log(user1.userEmail);
+   
    useEffect(() => {
-
-     const configuration = {
+      const configuration = {
       method: "delete",
       url: url1,
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
+      data:{
+          sellerEmail:user1.userEmail
+        }
     };
 
     
    axios(configuration)
    .then((result) => {
-    // getAllProducts();
     console.log(result);
    })
    .catch((error) => {
@@ -95,6 +72,7 @@ const handleDelete =(e)=>
       </Link>
     </div>
 
+{/* {productDataState.filter(user=>user.username?user.username.includes(user1.userEmail) : null) */}
 {productDataState.map((productDetails) => (
 <div class="w-auto  max-w-xs bg-gray-50 hover:shadow-2xl inline-block m-2.5 mt-8">
     <a href="/">

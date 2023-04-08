@@ -1,38 +1,38 @@
 var router = require('express').Router();
 const Product = require("./models/product");
+const Users = require("./models/users")
 
-// ADD
+// get total products from all user and add new product
+
 router.post("/", async(request, response) => {
 
-    // const newProduct = new Product({
-    //     title: request.body.title,
-    //     description: request.body.description,
-    //     price:request.body.price,
-    //     pincode:request.body.pincode,
-    //     imgurl:request.body.imgurl
-    //   });
-     
-    const newProduct = new Product(request.body);
-
-     newProduct.save()
+const newProduct = new Product(request.body);
+newProduct.save()
           
           .then((result) => {
             response.status(201).send({
               message: "Product Added Successfully",
               result,
+              
             });
-          })
-          
-          .catch((error) => {
+
+            Users.updateOne({email:result.sellerEmail},  {
+                $push: {"products": result._id}
+              }).then((result) => console.log(result))
+           })
+        
+             .catch((error) => {
             response.status(500).send({
               message: "Error ",
               error,
-            });
+            })
           });
 
-  });
+  
+})
 
-  // UPDATE
+
+  // UPDATE seller product
 
   router.put("/:id",  async (req, res) => {
     try {
@@ -52,49 +52,46 @@ router.post("/", async(request, response) => {
     }
   });
   
-  //DELETE
+  //DELETE seller product
   router.delete("/:id",  async (req, res) => {
     try {
+     
+      
+
       await Product.findByIdAndDelete(req.params.id);
       res.status(200).json("Product has been deleted...");
+
+      Users.updateOne({email:req.body.sellerEmail},  {
+        $pull: {"products":req.params.id}
+      }).then((result) => console.log(result))
+  
     } catch (err) {
       res.status(500).json(err);
     }
   });
 
-
-  router.get("/", async (req, res) => {
-    // const qNew = req.query.new;
-    // const qCategory = req.query.category;
-    // try {
-    //   let products;
-  
-    //   if (qNew) {
-    //     products = await Product.find().sort({ createdAt: -1 }).limit(1);
-    //   } else if (qCategory) {
-    //     products = await Product.find({
-    //       categories: {
-    //         $in: [qCategory],
-    //       },
-    //     });
-    //   } else {
-
-        try{
-
-       const products = await Product.find();
-
-        res.status(201).send({
-        message: "Fetched all products",
+//get products seller page
+  router.post("/1", async (req, res) => {
+    
+  try{
+        const products= await Product.find({sellerEmail:req.body.sellerEmail});
+        res.status(200).send({  
+        message:"Fetched Products",
         products
-          });
-        // res.status(200).json(products);
+    })
+  
+}
+  catch(err)
+  {
+    res.status(500).json(err);
+    console.log(err);
+  }
+    
+}) 
 
-        }
-       catch (err) {
-      res.status(500).json(err);
-    }
-  });
 
+ 
+  // get single product seller
 
   router.get("/:id", async (req, res) => {
 
@@ -114,6 +111,29 @@ router.post("/", async(request, response) => {
       }
 
   });
+
+
+
+
+  //BUYER 
+
+  router.post("/2", async (req, res) => {
+    
+    try{
+          const products= await Product.find({sellerEmail:{$ne : req.body.sellerEmail}});
+          res.status(200).send({  
+          message:"Fetched Products",
+          products
+      })
+    
+  }
+    catch(err)
+    {
+      res.status(500).json(err);
+      console.log(err);
+    }
+      
+  }) 
 
 
 

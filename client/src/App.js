@@ -1,10 +1,10 @@
 import React from "react";
 import "./App.css"
 import { BrowserRouter, Routes, Route, Router } from 'react-router-dom';
-import AppWrapper from "./AppWrapper";
+// import AppWrapper from "./AppWrapper";
 import Register from "./pages/Auth/Register"
-import Login from "./pages/Auth/Login"
-import Home from "./pages/Home"
+import Login from "./pages/Auth/Login";
+import Home from "./pages/Buyer/Home";
 import Cart from "./pages/Buyer/Cart";
 import Private from "./components/Private";
 import ProtectedRoutes from "./ProtectedRoutes";
@@ -16,6 +16,7 @@ import UpdateProduct from "./pages/Seller/UpdateProduct/UpdateProduct";
 
 // import ProtectedRoutes from "./ProtectedRoutes"
 import ProductDetails from "./components/ProductDetails";
+import EachProduct from "./pages/Buyer/EachProduct";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
   
         <div>
           
-        <AppWrapper>
+        
           <Routes>
            
              <Route path="/" element={<Home/>}></Route>
@@ -37,12 +38,14 @@ function App() {
             <Route path="/sell/products" element={<SellProducts/>}></Route>
             <Route path="/sell/products/:id" element={<UpdateProduct/>}></Route>
             <Route path="/cart" element={<Cart/>}></Route>
+            <Route path="/product1" element={<EachProduct/>}></Route>
+            
 
 
             <Route path="/product/:slug" element={<ProductDetails />}></Route>
             
           </Routes>
-          </AppWrapper>
+          
           
         </div>
       </BrowserRouter>

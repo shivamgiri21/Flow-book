@@ -5,14 +5,22 @@ import { HomeFilled, WalletFilled } from  '@ant-design/icons';
 import { ShoppingFilled } from "@ant-design/icons";
 import {ShoppingCartOutlined } from "@ant-design/icons"
 import { LogoutOutlined } from "@ant-design/icons";
+import { useEffect } from "react";
 
 
 import { Link } from "react-router-dom";
 
+// document.getElementsByClassName("SidebarIcon").click(function()
+// {
+//   document.getElementsByClassName('SideBarIcon').css("background-color","");
+//   document.getElementsBy(this).css("background-color","black");
+// });
 
-export default function Sidebar() {
 
 
+
+
+const Sidebar=function Sidebar() {
 
 
   return (
@@ -23,7 +31,7 @@ export default function Sidebar() {
           <ul className="sidebarList">
             <Link to="/sell" className="link">
             <li className="sidebarListItem ">
-               <HomeFilled  className="sidebarIcon" />
+               <HomeFilled  className="sidebarIcon" id="sidebarIcon1" />
               Dashboard
             </li>
             <br/>
@@ -128,3 +136,5 @@ export default function Sidebar() {
     </div>
   );
 }
+
+export default Sidebar;

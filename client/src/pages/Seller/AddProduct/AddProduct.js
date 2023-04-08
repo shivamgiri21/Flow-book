@@ -4,8 +4,16 @@ import "./addProduct.css";
 import axios from "axios";
 import Navbar from "../../../components/Navbar";
 import Sidebar from "../../../components/Seller/Sidebar";
+import jwtDecode from "jwt-decode";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 export default function AddProduct() {
+
+  const token = cookies.get("TOKEN");
+  const user1=jwtDecode(token);
+
 
 const initial =
     {
@@ -44,9 +52,6 @@ const [data,setData] =useState(initial);
      
    }
    
-  
-  
-
   const handleClick=(e)=>{
 
     e.preventDefault();
@@ -57,9 +62,10 @@ const [data,setData] =useState(initial);
         method: "post",
         url: "http://localhost:5000/sell/products",
         data: {...data,
-        imgurl:imgurl}
-       
-      };
+        imgurl:imgurl,
+        sellerEmail:user1.userEmail
+       }
+       };
   
       axios(configuration)
       

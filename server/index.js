@@ -35,7 +35,7 @@ app.use('/sell/products',require('./product'));
 app.get("/auth-endpoint", auth, (request, response) => {
       response.json({ isAdmin:true, message: "You are authorized to access me" });
     });
-app.use('/sell/products',require)
+// app.use('/sell/products',require)
 
 
 
