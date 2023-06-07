@@ -123,7 +123,11 @@ useEffect(() => {
           <label>Price</label>
           <input  name="price"  type="number"  value={data.price}  required="true"  onChange={handleChange}/>
            </div>
-
+           <div className="addProductItem"> 
+           <label>Location</label>
+          <input 
+             name="location"type="text"value={data.location}required="true"onChange={handleChange} />
+          </div> 
         <div className="addProductItem">
           <label>Pin Code</label>
             <input type="text"  name="pincode" value={data.pincode}required="true" onChange={handleChange} /> 

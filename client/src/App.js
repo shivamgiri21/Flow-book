@@ -38,7 +38,7 @@ function App() {
             <Route path="/sell/products" element={<SellProducts/>}></Route>
             <Route path="/sell/products/:id" element={<UpdateProduct/>}></Route>
             <Route path="/cart" element={<Cart/>}></Route>
-            <Route path="/product1" element={<EachProduct/>}></Route>
+            <Route path="/buy/products/:id" element={<EachProduct/>}></Route>
             
 
 

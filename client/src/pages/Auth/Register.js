@@ -31,7 +31,7 @@ const Register = () => {
         method: "post",
         url: "http://localhost:5000/register",
         data: {
-		  name,
+		      name,
           email,
           password
         },

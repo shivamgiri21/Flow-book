@@ -24,10 +24,12 @@ await User.findOne({ email: request.body.email })
           error,
         });
       }
+   
 
       //   create JWT token
       const token = jwt.sign(
         {
+          name:user.name,
           userId: user._id,
           userEmail: user.email,
         },

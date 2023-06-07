@@ -56,27 +56,31 @@ const [data,setData] =useState(initial);
 
     e.preventDefault();
 
-  console.log(imgurl);
+     console.log(imgurl);
 
     const configuration = {
         method: "post",
         url: "http://localhost:5000/sell/products",
         data: {...data,
         imgurl:imgurl,
-        sellerEmail:user1.userEmail
+        sellerEmail:user1.userEmail,
+        name:user1.name
        }
        };
   
       axios(configuration)
       
       .then((result) => { 
-        
         console.log(result);
+        alert("Product Added");
         })
 
-    .catch((error) => {console.log(error.response.data.errors.pincode);})
+    .catch((error) => {console.log(error.response.data.errors.pincode);
+    
+    alert("Try Again");
+  })
 
-     alert("Product Added");
+    
   }
 
 
@@ -129,6 +133,11 @@ const [data,setData] =useState(initial);
             // onChange={(e) => setprice(e.target.value)}
           />
         </div>
+          <div className="addProductItem">
+           <label>Location</label>
+          <input class="input1"
+             name="location"type="text"value={data.location}required="true"onChange={handleChange} />
+          </div> 
         <div className="addProductItem">
           <label>Pin Code</label>
             <input class="input1" type="text" 

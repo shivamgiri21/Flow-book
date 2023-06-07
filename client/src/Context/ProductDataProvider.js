@@ -20,7 +20,7 @@ export const ProductDataProvider = (props) => {
       }
    
 
-
+    //  console.log(user1);
     // seller products
     const getAllProducts = function()
     {

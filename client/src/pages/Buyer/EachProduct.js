@@ -6,6 +6,8 @@ import Footer from '../../components/Buyer/Footer';
 import { mobile } from '../../responsive';
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useParams } from 'react-router';
+import axios from 'axios';
 
 
 
@@ -27,7 +29,7 @@ const ImgContainer = styled.div`
 
 const Image = styled.img`
   width: 100%;
-  height: 90vh;
+  height: 75vh;
   object-fit: cover;
   ${mobile({ height: "40vh" })}
 `;
@@ -130,38 +132,34 @@ const Button = styled.button`
 
 const EachProduct = () => {
 
-    // const location = useLocation();
-    // const id = location.pathname.split("/")[2];
-    // const [product, setProduct] = useState({});
-    // const [quantity, setQuantity] = useState(1);
-    // const [color, setColor] = useState("");
-    // const [size, setSize] = useState("");
-    // const dispatch = useDispatch();
-  
-    // useEffect(() => {
-    //   const getProduct = async () => {
-    //     try {
-    //       const res = await publicRequest.get("/products/find/" + id);
-    //       setProduct(res.data);
-    //     } catch {}
-    //   };
-    //   getProduct();
-    // }, [id]);
-  
-    // const handleQuantity = (type) => {
-    //   if (type === "dec") {
-    //     quantity > 1 && setQuantity(quantity - 1);
-    //   } else {
-    //     setQuantity(quantity + 1);
-    //   }
-    // };
-  
-    // const handleClick = () => {
-    //   dispatch(
-    //     addProduct({ ...product, quantity, color, size })
-    //   );
-    // };
 
+  const [data,setData] =useState({});
+
+  const params = useParams();
+
+
+
+  
+ useEffect(() => {
+  const configuration = {
+  method: "get",
+  url: `http://localhost:5000/sell/products/${params.id}`,
+//   headers: { // Authorization: `Bearer ${token}`, //   },
+   };
+
+axios(configuration)
+.then((result) => {
+setData(result.data.products);
+
+})
+.catch((error) => {
+error = new Error();
+});
+},[])
+
+
+console.log(data);
+   
   return (
     <>
     <Container>
@@ -169,24 +167,25 @@ const EachProduct = () => {
       <Announcement />
       <Wrapper>
         <ImgContainer>
-          <Image src="https://res.cloudinary.com/dzgvbxjqd/image/upload/v1679696294/samples/people/bicycle.jpg"/>
+          <Image src={data.imgurl}/>
         </ImgContainer>
         <InfoContainer>
         <div class=" max-w-auto w-full h-auto m-2.5 p-6 bg-white border border-gray-200 rounded-lg shadow  hover:shadow-xl inline-block">
    <h5 class="text-0.5xl font-semibold tracking-tight text-teal-900 ">
-    BOOK NAME
+    {data.title}
    </h5>
     </div>
     <hr/>
           <div class=" max-w-auto w-full h-auto m-2.5 p-6 bg-white border border-gray-200 rounded-lg shadow  hover:shadow-xl inline-block">
    <h5 class="text-0.5xl font-semibold tracking-tight text-teal-900 ">
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    {data.description}
+{/* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. */}
    </h5>
     </div>
 <hr/>
     <div class=" max-w-auto w-full h-auto m-2.5 p-6 bg-white border border-gray-200 rounded-lg shadow  hover:shadow-xl inline-block">
    <h5 class="text-0.5xl font-semibold tracking-tight text-teal-900 ">
-    SELLER NAME
+    {data.sellerEmail}
  
    </h5>
    <br/>
